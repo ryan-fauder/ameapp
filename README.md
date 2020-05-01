@@ -129,16 +129,19 @@ module.exports = {
 }
 ```
 
-## Route User Controller
+## Route Project Controller
 
 ```js
 const express = require('express');
 const router = express.Router();
-const controller = require('../app/controllers/UserController');
-router.post('/register', controller.store);
+const controller = require('../app/controllers/projectController');
+ // const authMiddleware = require('../app/middleware/auth');
+ // router.use(authMiddleware);
+router.put('/:projectId', controller.update);
+router.get('/:projectId', controller.show);
 router.get('/', controller.index);
-router.post('/autenticar', controller.auth);
-router.post('/forgot_password', controller.forgotpass);
-router.put('/reset_password', controller.resetpass);
-module.exports = app => app.use('/user', router);
+router.post('/', controller.create);
+router.delete('/:projectId', controller.delete);
+router.get('/:projectId/tasks', controller.tasks);
+module.exports = app => app.use('/project', router);
 ```
