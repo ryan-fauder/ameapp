@@ -1,4 +1,8 @@
-# Git
+# Ameapp
+
+Please, use the command `yarn commit` to create a git commit! It'll create a formatted commit, so, you do need only push the commit!+
+
+## Git
 
 How to remote add a existing project in Github
 First, add select the folder that you wanna add:
@@ -43,3 +47,98 @@ git commit -m "Saving files before refreshing line endings"
 ## Rewrite the Git index to pick up all the new line endings
 
 git reset
+
+## Example CRUD
+
+```js
+const ProjectModel = require('../models/project');
+const TaskModel = require('../models/task');
+
+const Project = ProjectModel.model('Project');
+const Task = TaskModel.model('Task');
+module.exports = {
+  async create(req, res){
+    try {
+      const {tasks, ...projectInfo} = req.body;
+      const user = req.userId;
+      const project_table = new Project({...projectInfo, user});
+      await Promise.all(tasks.map(async task =>{
+        const project = project_table._id;  
+        const task_table = await Task.create({...task, project});
+        project_table.tasks.push(task_table);
+      }));
+      await project_table.save();
+      return res.send(project_table);
+    } catch(err) {
+      console.log(err);
+      res.status(400).send({error:"Error on creating a project"});
+    }
+  },
+  async tasks(req, res){
+    try {
+      const project = await Project.findById(req.params.projectId).populate('tasks');
+      return res.send(project.tasks);
+    } catch (err) {
+      console.log(err);
+      res.status(400).send({error:"Error on indexing tasks of the  project"});
+    }
+  },
+  async update(req, res){
+    try {
+      const {tasks, ...projectInfo} = req.body;
+      const user = req.userId;
+      const project_table = await Project.findByIdAndUpdate(req.params.projectId, projectInfo, {new: true, useFindAndModify: false} );
+      project_table.tasks = [];
+      await Task.remove({project:project_table._id});
+      await Promise.all(tasks.map(async task =>{
+        const project = project_table._id;  
+        const task_table = await Task.create({...task, project});
+        project_table.tasks.push(task_table);
+      }));
+      await project_table.save();
+      return res.send(project_table);
+    } catch(err) {
+      console.log(err);
+      res.status(400).send({error:"Error on updating a project"});
+    }
+  },
+  async delete(req, res){
+    try {
+      await Project.findOneAndRemove({id:req.params.projectId, user: req.userId});
+      res.status(200).send();
+    } catch {
+      res.status(400).send({error:"Error on deleting a project"});
+    }
+  },
+  async show(req, res){
+    try {
+      const project = await Project.findById(req.params.projectId);
+      res.send(project);
+    } catch {
+      res.status(400).send({error:"Error on showing a project"});
+    }
+  },
+  async index(req, res){
+    try {
+      const projects = await Project.find({user:req.userId});
+      res.send(projects);
+    } catch {
+      res.status(400).send({error:"Error on indexing projects"});
+    }
+  },
+}
+```
+
+## Route User Controller
+
+```js
+const express = require('express');
+const router = express.Router();
+const controller = require('../app/controllers/UserController');
+router.post('/register', controller.store);
+router.get('/', controller.index);
+router.post('/autenticar', controller.auth);
+router.post('/forgot_password', controller.forgotpass);
+router.put('/reset_password', controller.resetpass);
+module.exports = app => app.use('/user', router);
+```
