@@ -145,3 +145,5 @@ router.delete('/:projectId', controller.delete);
 router.get('/:projectId/tasks', controller.tasks);
 module.exports = app => app.use('/project', router);
 ```
+
+<https://thoughtbot.com/blog/structure-for-styling-in-react-native>
