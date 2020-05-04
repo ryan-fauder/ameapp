@@ -1,38 +1,59 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   SafeAreaView,
   StatusBar,
-  TouchableOpacity,
+  View
 } from "react-native";
 import { Link, NativeRouter } from "react-router-native";
+import Icon from "react-native-vector-icons/MaterialCommunityIcons";
 import Route from "./routes";
-import { Bar, TitleBar } from "./style";
+import { Bar, ContainerTitle } from "./style";
 
-const App = () => (
-  <NativeRouter>
-    <StatusBar barStyle="dark-content" />
-    <SafeAreaView>
-      <Bar>
-        <Link
-          to="/"
-          component={({ onPress, children }) => (
-            <TouchableOpacity onPress={onPress}>{children}</TouchableOpacity>
-          )}
-        >
-          <TitleBar>Home</TitleBar>
-        </Link>
-        <Link
-          to="/product"
-          component={({ onPress, children }) => (
-            <TouchableOpacity onPress={onPress}>{children}</TouchableOpacity>
-          )}
-        >
-          <TitleBar>Product</TitleBar>
-        </Link>
-      </Bar>
-      <Route />
-    </SafeAreaView>
-  </NativeRouter>
-);
-
+const App = () => {
+  const activedButton = useState([1, 0, 0, 0]);
+  return (
+    <NativeRouter>
+      <StatusBar backgroundColor="#FFF" barStyle="dark-content" />
+      <SafeAreaView style={{ flex: 1 }}>
+        <View style={{ flex: 1 }}>
+          <Route />
+        </View>
+        <Bar style={{ elevation: 10 }}>
+          <Link
+            to="/"
+            component={({ onPress, children }) => (
+              <ContainerTitle onPress={onPress}>{children}</ContainerTitle>
+            )}
+          >
+            <Icon name="home" size={30} color="#e60014" style={{ textAlign: "center" }} />
+          </Link>
+          <Link
+            to="/product"
+            component={({ children }) => (
+              <ContainerTitle>{children}</ContainerTitle>
+            )}
+          >
+            <Icon name="view-dashboard" size={30} color="#ccc" style={{ textAlign: "center" }} />
+          </Link>
+          <Link
+            to="/"
+            component={({ children }) => (
+              <ContainerTitle>{children}</ContainerTitle>
+            )}
+          >
+            <Icon name="heart" size={30} color="#ccc" style={{ textAlign: "center" }} />
+          </Link>
+          <Link
+            to="/product"
+            component={({ onPress, children }) => (
+              <ContainerTitle onPress={onPress}>{children}</ContainerTitle>
+            )}
+          >
+            <Icon name="account" size={30} color="#ccc" style={{ textAlign: "center" }} />
+          </Link>
+        </Bar>
+      </SafeAreaView>
+    </NativeRouter>
+  );
+};
 export default App;
