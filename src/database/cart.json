@@ -1,0 +1,10 @@
+[
+    {
+        "id_user": "1",
+        "id_product": "1",
+        "quantidade": 3,
+        "cupom":"cupom10%",
+        "valor_compra": 99.99 
+
+    }
+]

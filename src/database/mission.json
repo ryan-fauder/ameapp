@@ -1,0 +1,9 @@
+[
+    {
+        "id": "1",
+        "titulo": "Desconto gratis",
+        "description": "compre 3 celulares!",
+        "valor_lucro": 12,
+        "xp_lucro" : 120
+    }
+]

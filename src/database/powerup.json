@@ -1,0 +1,9 @@
+[
+    {
+        "id": "1",
+        "name": "Desconto no frete",
+        "description": "10 reais de desconto no frete de produtos",
+        "valor": 500,
+        "additional":10
+    }
+]

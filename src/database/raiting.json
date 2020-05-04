@@ -1,0 +1,10 @@
+[
+    {
+        "id_user": "1",
+        "id_product": "1",
+        "rate": "5",
+        "title": "Otimo produto!",
+        "texto": "Muito bom esse sistema gamificado de descontos! Comprei esse produto graças a isso!",
+        "recomendation": true
+    }
+]

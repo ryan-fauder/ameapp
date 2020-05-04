@@ -1,0 +1,23 @@
+[{
+    "id": "1",
+    "nome": "Celular xiomai",
+    "descrição": "Celular produzido pela Xiaomi com um maior foco no alto desepenho",
+    "valor": 2000.00,
+    "imagen_url": "url"
+},
+{
+    "id": "2",
+    "nome": "Celular Samsung",
+    "descrição": "Celular produzido pela Xiaomi com um maior foco no alto desepenho",
+    "valor": 2354.50,
+    "imagen_url": "url"
+},
+{
+    "id": "3",
+    "nome": "Celular Iphone",
+    "descrição": "Celular produzido pela Xiaomi com um maior foco no alto desepenho",
+    "valor": 6120.88,
+    "imagen_url": "url"
+}
+
+]
