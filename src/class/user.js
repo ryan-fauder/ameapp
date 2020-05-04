@@ -1,6 +1,6 @@
 const user = require('database/user.json');
 
-
+aaa
 class User {
 
     constructor(user){
