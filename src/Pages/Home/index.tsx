@@ -52,7 +52,7 @@ export default function Home() {
       </ListIcon>
       <View>
         <Text>Banner de promoção</Text>
-      </View> 
+      </View>
       <View>
         <Text>Categorias</Text>
         <Text>Ver todas</Text>

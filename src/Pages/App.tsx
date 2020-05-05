@@ -29,7 +29,7 @@ const App = () => (
           <Icon name="home" size={30} key={0} color="#e60014" style={{ textAlign: "center" }} />
         </Link>
         <Link
-          to="/product"
+          to="/"
           component={({ children }) => (
             <ContainerTitle>{children}</ContainerTitle>
           )}
@@ -45,7 +45,7 @@ const App = () => (
           <Icon name="heart" size={30} color="#ccc" style={{ textAlign: "center" }} />
         </Link>
         <Link
-          to="/product"
+          to="/perfil"
           component={({ onPress, children }) => (
             <ContainerTitle onPress={onPress}>
               {children}
